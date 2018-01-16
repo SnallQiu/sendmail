@@ -29,22 +29,23 @@ def format_attrs(s):
 
 
 
-def toaddress(x):                                                                    #想个方法随机抽40个发
+def toaddress(num):                                                                    #想个方法随机抽40个发
     with open('收信人2.txt', 'r') as ff:
         #x = x-2050
-        list_40 = []
         w = ff.readlines()
         y = int(len(w)/40)
-        if x==0:
-            x = choice(range(1,y))                                                      #随机选40个收件人
-        for i in range(40 * (int(x) - 1), 40 * x):
-            list_40.append(w[i].strip())
-        list_40.append('305460936@qq.com')
+        for s in range(num):
+            list_40 = []
+            x = choice(range(1, y))  # 随机选40个收件人
+            for i in range(5 * (int(x) - 1), 5 * x):
+                list_40.append(w[i].strip())
+            list_40.append('305460936@qq.com')
+            yield list_40
         #list_40.append('17854212463@163.com')
         #list_40.append('513359686@qq.com')                                         #如果要测试邮箱发送率 这边添加一个自己的qq收件箱
         #list_40.append('870407139@qq.com')
 
-        return list_40
+
 
 
 def from_addr():  # 将账号密码拿出来保存到list列表
@@ -188,7 +189,7 @@ def main(n,s,badip):
     fromlist = from_addr()
     print('一共有%d个发件人'%(len(fromlist)))
     #s = int(input('请输入发件人文件中第几个发件人开始：'))-1                                    #输入1  s = 0
-    input_to = 0#int(input('一共有36w/40 = 9000个收件人片段，输入发到第几个片段，如果输入为0 则随机片段发送：'))
+    input_to = 1#int(input('一共有36w/40 = 9000个收件人片段，输入发到第几个片段，如果输入为0 则随机片段发送：'))
     flag = 1                                                                               #flag 代表ip可用性
     iplist = get_testip(input_ip,badip)
     for x in range(s, len(fromlist)-1):
@@ -230,13 +231,16 @@ def main(n,s,badip):
                         emails.append(format_attrs('尊敬的用户 <%s>' % x))
                     '''
                     # msg['To'] = ','.join((format_attrs('管理员 <%s>'%to_addr1),format_attrs(' <%s>'%to_addr2))
-                    msg['To'] = ','.join(toaddress(input_to))
+                    #msg['To'] = ','.join(toaddress(input_to))
                     msg['Subject'] = Header('齐天大圣的问候', 'utf-8').encode()
                     server = smtplib.SMTP(smtp_server, 25, timeout=10)
                     server.starttls()
                     server.set_debuglevel(1)
                     server.login(fromlist[x][0][0], fromlist[x][0][1].strip())
-                    server.sendmail(fromlist[x][0][0], toaddress(input_to), msg.as_string())
+                    for i in toaddress(8):
+                        msg['To'] = ','.join(i)
+                        server.sendmail(fromlist[x][0][0], i, msg.as_string())
+                        print('发送5封成功！')
                     server.quit()
                     # email_hassend.append(fromlist[x][0][0])
                     n = n + 1
@@ -260,8 +264,7 @@ def main(n,s,badip):
 
         except Exception as e:
             #print(str(e))
-            if iplist ==[]:
-
+            if iplist ==None or iplist ==[]:
                 break
             pass
 
@@ -293,7 +296,3 @@ while 1:
     socket.socket = socks.socksocket
     socks.setdefaultproxy()
     #print('这些烂ip们：',badip)#把http ip弄回成主机ip
-
-
-
-
