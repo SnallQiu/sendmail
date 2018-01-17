@@ -1,3 +1,7 @@
+'''vertion1.2'''
+新增config设置，默认设置均在config里设置，运行前请先进行config配置
+
+
 ‘’‘模块’‘’
 
 邮件模块：基于SMTP
