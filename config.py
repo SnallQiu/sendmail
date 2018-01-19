@@ -5,7 +5,7 @@ import msgtxt
 
 '''设置收发邮箱文件'''
 toaddress = '收信人2.txt'
-fromaddress = '/Users/zangxiaojie/PycharmProjects/sendemail/fromadd.txt'
+fromaddress = 'fromadd3.txt'
 
 '''设置检查收到邮箱，可以添加自己的邮箱'''
 myaddress = ['305460936@qq.com']
