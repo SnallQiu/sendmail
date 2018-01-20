@@ -1,4 +1,5 @@
 import msgtxt
+import time
 '''温馨提示：使用前上快代理设置 https://www.kuaidaili.com/usercenter/dpsipwhitelist/  主机ip白名单'''
 
 '''在这里进行常规设置'''
@@ -15,4 +16,5 @@ myaddress = ['305460936@qq.com']
 runtime = '2330'
 
 '''设置信封文本内容'''
+
 msg_txt = msgtxt.text

@@ -1,4 +1,4 @@
-text = [                     "猴子家app是一个新房，短租，二手房的买卖平台，\n"
+texts = [                     "猴子家app是一个新房，短租，二手房的买卖平台，\n"
                             +"这里有丰富的房产资讯，一手的新房，温馨的二手房，还可以电话直联房东哦。\n"
                             +"这是一款二次元租房神器。这里是齐天大圣的家。买房就上猴子家。\n"
                             # + "猴子家下载链接：https://itunes.apple.com/cn/app/%E7%8C%B4%E5%AD%90%E5%AE%B6-%E6%96%B0%E6%88%BF-%E7%9F%AD%E7%A7%9F-%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9A%84%E4%B9%B0%E5%8D%96%E5%B9%B3%E5%8F%B0/id1121556351?mt=8 <br> "
@@ -31,12 +31,24 @@ text = [                     "猴子家app是一个新房，短租，二手房�
 
                             '我爹常说，买房的人有三个阶段：见自己，见天地，见众生。\n'
                             +'我见过自己，也算见过天地，可惜见不到众生。这条路我没走完，希望你能把它走下去。\n'
-                            +'买房就上猴子家\n',
+                            +'买房就上猴子家\n'
                             +'请关注微信公众号：houzihome',
-'
+
+                             '我一直在寻找，有你的世界在哪里。'
+
                            
 
  
                             #+'itunes.apple.com/cn/app/%E7%8C%B4%E5%AD%90%E5%AE%B6-%E6%96%B0%E6%88%BF-%E7%9F%AD%E7%A7%9F-%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9A%84%E4%B9%B0%E5%8D%96%E5%B9%B3%E5%8F%B0/id1121556351?mt=8'
                            
                             ]
+import time
+def gettext(txt):
+    now = time.strftime('%m%d', time.localtime(time.time()))
+    if int(now) % 2 == 0:
+        msg_txt = txt[:3]
+    else:
+        msg_txt = txt[3:]
+    return msg_txt
+
+text = gettext(texts)
