@@ -85,7 +85,7 @@ def get_testip(x,badip):                                                        
         #jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//newExclusive/getIp?spiderId=dc42e156630441bc842e327e3239de8a&orderno=MF201712235216hAYJPw&returnType=2&count={x}&machineArea='.format(x = x))
         '''kuaidaiapi'''
         #jsonip = getHtmlText('http://dps.kuaidaili.com/api/getdps/?orderid=901400145784338&num={x}&format=json&sep=1'.format(x= x))
-        jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//privateProxy/getDynamicIP/DD20181247334wV15mW/70e4e2d7fcdd11e6942200163e1a31c0?returnType=2')
+        jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=dc42e156630441bc842e327e3239de8a&orderno=MF201812530601DmIWh&returnType=2&count=11')
         ips = json.loads(jsonip)
         print(ips)
         '''快代理'''
@@ -93,9 +93,11 @@ def get_testip(x,badip):                                                        
 
         #for i in ips['RESULT']:
         try:
+            for i in ips['RESULT']:
+
                 #if i.split(':')[0] in badip:
                 #   break
-            iplist.append([ips['RESULT']['wanIp'],int(ips['RESULT']['proxyport'])])
+                iplist.append([i['ip'],int(i['port'])])
 
         except Exception as e:
             print(str(e))
@@ -136,7 +138,9 @@ def get_testip(x,badip):                                                        
 def gettext():                                                                            #再加几个内容，防止被发出去了收不到
 
     text = config.msg_txt
-    return text
+    text_html = config.msg_txt_html
+
+    return choice([MIMEText(choice(text),'plain','utf-8'),MIMEText(choice(text_html),'html','utf-8')])
 
 
 '''主函数在这里'''
@@ -177,9 +181,8 @@ def main(n,s,badip):
                     flag = 0
                     print('当前ip：' + requests.get("http://icanhazip.com", timeout=30).text)#验证当前ip
                     smtp_server = 'smtp.163.com'
-                    text = gettext()                                                       #得到邮件内容列表
 
-                    msg = MIMEText(choice(text))                                           #从内容列表中随机选一个作为最终发出去的内容
+                    msg = gettext()                                         #从内容列表中随机选一个作为最终发出去的内容
 
 
                     msg['From'] = format_attrs('猴子家houzihome <%s>' % fromlist[x][0][0])
