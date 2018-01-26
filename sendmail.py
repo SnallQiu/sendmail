@@ -85,19 +85,18 @@ def get_testip(x,badip):                                                        
         #jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//newExclusive/getIp?spiderId=dc42e156630441bc842e327e3239de8a&orderno=MF201712235216hAYJPw&returnType=2&count={x}&machineArea='.format(x = x))
         '''kuaidaiapi'''
         #jsonip = getHtmlText('http://dps.kuaidaili.com/api/getdps/?orderid=901400145784338&num={x}&format=json&sep=1'.format(x= x))
-        jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=dc42e156630441bc842e327e3239de8a&orderno=MF201812530601DmIWh&returnType=2&count=11')
-        ips = json.loads(jsonip)
+        jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//privateProxy/getDynamicIP/DD20181247334wV15mW/acbbc7f5c5d911e7bcaf7cd30abda612?returnType=2')
+        ips = json.loads(jsonip)['RESULT']
         print(ips)
         '''快代理'''
 
 
         #for i in ips['RESULT']:
         try:
-            for i in ips['RESULT']:
 
                 #if i.split(':')[0] in badip:
                 #   break
-                iplist.append([i['ip'],int(i['port'])])
+            iplist.append([ips['wanIp'],int(ips['proxyport'])])
 
         except Exception as e:
             print(str(e))

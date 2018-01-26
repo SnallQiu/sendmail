@@ -18,3 +18,4 @@ runtime = '2530'
 '''设置信封文本内容'''
 
 msg_txt = msgtxt.text
+msg_txt_html = msgtxt.text_html

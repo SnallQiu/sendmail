@@ -44,7 +44,7 @@ texts = [                     "猴子家app是一个新房，短租，二手房�
                             #+'itunes.apple.com/cn/app/%E7%8C%B4%E5%AD%90%E5%AE%B6-%E6%96%B0%E6%88%BF-%E7%9F%AD%E7%A7%9F-%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9A%84%E4%B9%B0%E5%8D%96%E5%B9%B3%E5%8F%B0/id1121556351?mt=8'
                            
                             ]
-text_html = [
+text_htmls = [
 
     '<html><body><h1>猴子家</h1>'+
     '<p>猴子家app是一个新房，短租，二手房的买卖平台，</p>'+
@@ -81,9 +81,7 @@ text_html = [
                             +'<p>姑娘，还在为和男朋友吵架而闷闷不乐？买个房子吧，让我们做你最终的安慰。</p>'
                             +'<p>姑娘，爱像烟火，怎么热烈缤纷怎么来，而绚烂过后往往是满地碎屑，买个房子吧，让我们握住你的手，给你一生的安全感。</p>'
                             +'<p>姑娘，清水煮岁月，不悲不喜，做个远离尘世，安安静静地女子，是毕生的愿望，买个房子吧，他会是你最好的依靠。</p>'
-                            +'<p>买房就上<a href="https://itunes.apple.com/cn/app\
-    /%E7%8C%B4%E5%AD%90%E5%AE%B6-%E6%96%B0%E6%88%BF-%E7%9F%AD%E\
-    7%A7%9F-%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9A%84%E4%B9%B0%E5%8D%96%E5%B9%B3%E5%8F%B0/id1121556351?mt=8">猴子家</a></p></body></html>',
+                            +'<p>买房就上<a href="https://itunes.apple.com/cn/app/%E7%8C%B4%E5%AD%90%E5%AE%B6-%E6%96%B0%E6%88%BF-%E7%9F%AD%E7%A7%9F-%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9A%84%E4%B9%B0%E5%8D%96%E5%B9%B3%E5%8F%B0/id1121556351?mt=8">猴子家</a></p></body></html>',
 
 
 
@@ -112,4 +110,5 @@ def gettext(txt):
         msg_txt = txt[3:]
     return msg_txt
 
-text = gettext(texts)
+text = gettext(texts)              #返回给config调用
+text_html = gettext(text_htmls)    #返回给config调用
