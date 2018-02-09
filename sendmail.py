@@ -12,6 +12,7 @@ from random import choice
 import time
 import datetime
 import config
+import msgtxt
 
 
 
@@ -85,23 +86,25 @@ def get_testip(x,badip):                                                        
                 #x=x))
         #jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//newExclusive/getIp?spiderId=dc42e156630441bc842e327e3239de8a&orderno=MF201712235216hAYJPw&returnType=2&count={x}&machineArea='.format(x = x))
         '''kuaidaiapi'''
-        jsonip = getHtmlText('http://dps.kuaidaili.com/api/getdps/?orderid=901400145784338&num={x}&format=json&sep=1'.format(x= x))
+        #jsonip = getHtmlText('http://dps.kuaidaili.com/api/getdps/?orderid=901400145784338&num={x}&format=json&sep=1'.format(x= x))
+        jsonip = getHtmlText('http://api.xdaili.cn/xdaili-api//privateProxy/getDynamicIP/DD20181247334wV15mW/c6fa2fdc7db611e7bcaf7cd30abda612?returnType=2')
         ips = json.loads(jsonip)
         print(ips)
         '''快代理'''
 
 
-        for i in ips['data']['proxy_list']:
-            try:
+        #for i in ips['RESULT']:
+        try:
                 #if i.split(':')[0] in badip:
                 #   break
-                iplist.append([i.split(':')[0],int(i.split(':')[1])])
+            iplist.append([ips['RESULT']['wanIp'],int(ips['RESULT']['proxyport'])])
 
-            except Exception as e:
-                print(str(e))
-                pass
+        except Exception as e:
+            print(str(e))
+            pass
         if iplist == []:
             get_testip(x,badip)
+            time.sleep(15)
         return iplist
 
         #快代理
@@ -123,7 +126,7 @@ def get_testip(x,badip):                                                        
 
     except:
         print('得到ip失败......重新获取中')
-        time.sleep(5)
+        time.sleep(15)
 
         get_testip(x,badip)
 
@@ -134,7 +137,7 @@ def get_testip(x,badip):                                                        
     pass
 def gettext():                                                                            #再加几个内容，防止被发出去了收不到
 
-    text = config.msg_txt
+    text = msgtxt.Text.gettext()
     return text
 
 
@@ -247,4 +250,3 @@ while 1:
     n,x,badip = main(n,x,badip)
     socket.socket = socks.socksocket
     socks.setdefaultproxy()
-
